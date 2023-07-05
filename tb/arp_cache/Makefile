@@ -66,4 +66,5 @@ iverilog_dump.v:
 
 clean::
 	@rm -rf iverilog_dump.v
+	@rm -rf results.xml
 	@rm -rf dump.fst $(TOPLEVEL).fst

@@ -3,4 +3,9 @@
 *.pyc
 *.vvp
 *.kate-swp
+*.xml
+*.fst
+*.gtkw
+sim_build
+iverilog_dump.*
 
