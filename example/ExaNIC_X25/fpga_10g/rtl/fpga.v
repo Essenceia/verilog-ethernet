@@ -79,7 +79,7 @@ wire mmcm_rst = 1'b0;
 wire mmcm_locked;
 wire mmcm_clkfb;
 
-// MMCM instance
+// MMCM instance : Generates multiple clocks
 // 161.13 MHz in, 125 MHz out
 // PFD range: 10 MHz to 500 MHz
 // VCO range: 800 MHz to 1600 MHz
@@ -137,6 +137,7 @@ clk_mmcm_inst (
     .LOCKED(mmcm_locked)
 );
 
+// clock buffering
 BUFG
 clk_125mhz_bufg_inst (
     .I(clk_125mhz_mmcm_out),
@@ -195,6 +196,7 @@ wire sfp_mgt_refclk_bufg;
 
 assign clk_161mhz_int = sfp_mgt_refclk_bufg;
 
+// input gigabite transiver
 IBUFDS_GTE4 ibufds_gte4_sfp_mgt_refclk_inst (
     .I     (sfp_mgt_refclk_p),
     .IB    (sfp_mgt_refclk_n),
@@ -338,10 +340,12 @@ core_inst (
     .sfp_1_tx_rst(sfp_1_tx_rst_int),
     .sfp_1_txd(sfp_1_txd_int),
     .sfp_1_txc(sfp_1_txc_int),
+
     .sfp_1_rx_clk(sfp_1_rx_clk_int),
     .sfp_1_rx_rst(sfp_1_rx_rst_int),
     .sfp_1_rxd(sfp_1_rxd_int),
     .sfp_1_rxc(sfp_1_rxc_int),
+
     .sfp_2_tx_clk(sfp_2_tx_clk_int),
     .sfp_2_tx_rst(sfp_2_tx_rst_int),
     .sfp_2_txd(sfp_2_txd_int),
